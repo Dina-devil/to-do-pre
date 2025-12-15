@@ -50,18 +50,12 @@ function createItem(item) {
         saveTasks(getTasksFromDOM());
     });
 
-    textElement.addEventListener("keydown", (e) => {
-        if (e.key === "Enter") {
-            e.preventDefault();
-            textElement.blur();
-        }
-    });
-
     return clone;
 }
 
+// получение всех задач
 function getTasksFromDOM() {
-    const elements = document.querySelectorAll(".to-do__item-text");
+    const elements = listElement.querySelectorAll(".to-do__item-text");
     const tasks = [];
 
     elements.forEach((el) => {
@@ -71,11 +65,12 @@ function getTasksFromDOM() {
     return tasks;
 }
 
+// сохранение
 function saveTasks(tasks) {
     localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
-// загрузка задач при открытии
+// загрузка при открытии
 items = loadTasks();
 items.forEach((item) => {
     listElement.append(createItem(item));
